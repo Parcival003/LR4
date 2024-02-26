@@ -21,7 +21,6 @@ public class LibraryController : ControllerBase
     [HttpGet("Books")]
     public IActionResult GetBooks()
     {
-        // Отримання списку книг з файлу конфігурації
         var books = _configuration.GetSection("Books").Get<List<string>>();
         return Ok(books);
     }
@@ -31,12 +30,11 @@ public class LibraryController : ControllerBase
     {
         if (id.HasValue && id >= 0 && id <= 5)
         {
-            // Отримання інформації про користувача за вказаним id з файлу конфігурації
+         
             var userInfo = _configuration.GetSection($"Profiles:{id}").Get<string>();
             return Ok(userInfo);
         }
 
-        // Виведення інформації про самого користувача
         var currentUserInfo = _configuration.GetSection("CurrentUser").Get<string>();
         return Ok(currentUserInfo);
     }
